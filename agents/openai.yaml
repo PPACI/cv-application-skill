@@ -1,0 +1,4 @@
+interface:
+  display_name: "CV Application"
+  short_description: "Tailor CVs from reusable candidate evidence"
+  default_prompt: "Use $cv-application to create a tailored CV application from this job description."
