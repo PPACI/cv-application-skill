@@ -1,0 +1,11 @@
+{
+  "name": "cv-application-skill-scripts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Runtime dependencies for the CV application skill scripts.",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "4.7.9",
+    "zod": "4.4.3"
+  }
+}

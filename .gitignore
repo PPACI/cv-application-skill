@@ -1,0 +1,28 @@
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Test/build output
+coverage/
+dist/
+build/
+tmp/
+temp/
+
+# Generated CV artifacts
+applications/*/cv.html
