@@ -33,10 +33,9 @@ This repository has a root-level `SKILL.md`, so the CLI can discover the skill d
 
 ## Prerequisites
 
-- Node.js with `npx`, or a compatible JavaScript package runner, to run the Skills CLI.
-- Go to run the bundled bootstrap and HTML generator scripts.
+- Node.js with `npm` and `npx`, or a compatible JavaScript package runner, to run the Skills CLI and bundled scripts.
 
-The skill includes setup helpers that check for Go and install it through common package managers when possible:
+The skill includes setup helpers that install the generator runtime dependencies under `scripts/`:
 
 ```bash
 sh scripts/setup.sh
@@ -45,8 +44,6 @@ sh scripts/setup.sh
 ```powershell
 .\scripts\setup.ps1
 ```
-
-Agents should request approval before running installer commands that need system or network access.
 
 ## Quick Start
 

@@ -1,32 +1,23 @@
 $ErrorActionPreference = "Stop"
 
-$go = Get-Command go -ErrorAction SilentlyContinue
-if ($go) {
-    go version
-    exit 0
-}
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-function Test-Command {
-    param([string]$Name)
-    return [bool](Get-Command $Name -ErrorAction SilentlyContinue)
-}
-
-if (Test-Command "winget") {
-    winget install --id GoLang.Go -e
-} elseif (Test-Command "choco") {
-    choco install golang -y
-} elseif (Test-Command "scoop") {
-    scoop install go
-} else {
-    Write-Error "Go is missing and no supported Windows package manager was found. Install Go manually from https://go.dev/dl/ and rerun this script."
+$node = Get-Command node -ErrorAction SilentlyContinue
+if (-not $node) {
+    Write-Error "Node.js is required to run the bundled CV application scripts. Install Node.js from https://nodejs.org/ and rerun this script."
     exit 1
 }
 
-$go = Get-Command go -ErrorAction SilentlyContinue
-if ($go) {
-    go version
-    exit 0
+node --version
+
+$npm = Get-Command npm -ErrorAction SilentlyContinue
+if (-not $npm) {
+    Write-Error "npm is required to install the bundled CV application script dependencies. Install Node.js with npm from https://nodejs.org/ and rerun this script."
+    exit 1
 }
 
-Write-Error "Go installation command completed, but go was not found on PATH. Open a new PowerShell session or update PATH, then rerun this script."
-exit 1
+if (Test-Path (Join-Path $scriptDir "package-lock.json")) {
+    npm --prefix "$scriptDir" ci --omit=dev --no-audit --fund=false
+} else {
+    npm --prefix "$scriptDir" install --omit=dev --no-audit --fund=false
+}

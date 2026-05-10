@@ -5,7 +5,7 @@ The generator reads a single JSON file and writes `cv.html` in the same director
 Run:
 
 ```bash
-GO111MODULE=off go run <skill-dir>/scripts/generate/main.go applications/<slug>/config.json
+node <skill-dir>/scripts/generate/main.js applications/<slug>/config.json
 ```
 
 ## Contract

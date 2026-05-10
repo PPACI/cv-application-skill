@@ -9,13 +9,7 @@ Use an application-first repository layout. Reusable candidate truth lives in `k
 
 ## Preflight
 
-Before bootstrap or generation, confirm Go is available:
-
-```bash
-go version
-```
-
-If Go is missing, use the bundled setup script for the current OS:
+Before bootstrap or generation, run the bundled setup script for the current OS:
 
 ```bash
 sh <skill-dir>/scripts/setup.sh
@@ -25,14 +19,14 @@ sh <skill-dir>/scripts/setup.sh
 & "<skill-dir>\scripts\setup.ps1"
 ```
 
-If installing Go requires system or network access, request approval before running the install step. The setup scripts detect existing Go first and only install when it is absent.
+Setup verifies Node.js and npm, then installs the bundled script dependencies from `<skill-dir>/scripts/package-lock.json`. It does not install system packages.
 
 ## Bootstrap
 
 For a new repository, create the standard scaffold before starting an application:
 
 ```bash
-GO111MODULE=off go run <skill-dir>/scripts/bootstrap/main.go .
+node <skill-dir>/scripts/bootstrap/main.js .
 ```
 
 Bootstrap creates missing `knowledge/` and `applications/` files, appends the generated CV ignore rule to `.gitignore` when needed, and never overwrites existing candidate facts.
@@ -50,7 +44,7 @@ Bootstrap creates missing `knowledge/` and `applications/` files, appends the ge
 9. Generate HTML next to the JSON:
 
 ```bash
-GO111MODULE=off go run <skill-dir>/scripts/generate/main.go applications/<slug>/config.json
+node <skill-dir>/scripts/generate/main.js applications/<slug>/config.json
 ```
 
 10. Verify `applications/<slug>/cv.html` exists and contains the tailored summary, experience, skills, languages, and contact links.
