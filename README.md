@@ -14,13 +14,13 @@ The skill helps an agent:
 Install with the Vercel Skills CLI:
 
 ```bash
-npx skills add PPACI/cv-application-skill
+npx skills add PPACI/cv-application-skill --skill cv-application
 ```
 
 Install globally for Codex:
 
 ```bash
-npx skills add PPACI/cv-application-skill -g -a codex
+npx skills add PPACI/cv-application-skill --skill cv-application -g -a codex
 ```
 
 List the skill without installing:
@@ -29,7 +29,7 @@ List the skill without installing:
 npx skills add PPACI/cv-application-skill --list
 ```
 
-This repository has a root-level `SKILL.md`, so the CLI can discover the skill directly. See the [Vercel Agent Skills docs](https://vercel.com/docs/agent-resources/skills) and the [Vercel Labs Skills CLI README](https://github.com/vercel-labs/skills/blob/main/README.md) for the current CLI syntax and supported agents.
+The installable skill lives in `skills/cv-application/`, separate from this repository's integration tests and package tooling. See the [Vercel Agent Skills docs](https://vercel.com/docs/agent-resources/skills) and the [Vercel Labs Skills CLI README](https://github.com/vercel-labs/skills/blob/main/README.md) for the current CLI syntax and supported agents.
 
 ## Prerequisites
 
@@ -38,11 +38,11 @@ This repository has a root-level `SKILL.md`, so the CLI can discover the skill d
 The skill includes setup helpers that install the generator runtime dependencies under `scripts/`:
 
 ```bash
-sh scripts/setup.sh
+sh skills/cv-application/scripts/setup.sh
 ```
 
 ```powershell
-.\scripts\setup.ps1
+.\skills\cv-application\scripts\setup.ps1
 ```
 
 ## Quick Start
@@ -63,6 +63,10 @@ Use $cv-application to create a CV application for this job description:
 The skill will create an application folder, compare the job requirements against `knowledge/`, ask for missing reusable evidence, and generate `applications/<slug>/cv.html`.
 
 ## Repository Layout
+
+This source repository keeps the skill implementation under `skills/cv-application/` and the integration harness under `tests/`.
+
+The skill creates this layout in target CV application repositories:
 
 ```text
 knowledge/

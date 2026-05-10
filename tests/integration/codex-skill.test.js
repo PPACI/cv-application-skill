@@ -4,6 +4,7 @@ import { basename, join, resolve } from "node:path";
 import { describe, expect, test } from "vitest";
 
 const repoRoot = resolve(import.meta.dirname, "..", "..");
+const skillRoot = join(repoRoot, "skills", "cv-application");
 const runsRoot = join(repoRoot, "tmp", "integration-runs");
 
 const scenarios = [
@@ -134,20 +135,12 @@ async function createWorkspace(slug) {
 
 async function prepareSkillSource(workspace) {
   const skillSource = join(workspace, "local-skill-source");
-  const entries = [
-    "SKILL.md",
-    "README.md",
-    "LICENSE",
-    "agents",
-    "assets",
-    "references",
-    "scripts",
-  ];
+  const entries = ["SKILL.md", "agents", "assets", "references", "scripts"];
 
   await mkdir(skillSource, { recursive: true });
 
   for (const entry of entries) {
-    await cp(join(repoRoot, entry), join(skillSource, entry), {
+    await cp(join(skillRoot, entry), join(skillSource, entry), {
       recursive: true,
       filter: (source) => !source.split("/").includes("node_modules"),
     });
